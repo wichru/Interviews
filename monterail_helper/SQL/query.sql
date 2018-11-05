@@ -8,3 +8,5 @@ JOIN comments AS c ON c.post_id = p.id
 JOIN users AS cu ON cu.id = c.user_id
 GROUP BY p.id, pu.first_names, c.content, c.user_id, cu.first_names, c.posted_at
 ORDER BY p.id DESC, c.posted_at DESC;
+
+Post.joins(:user, {comments: :user}).select("posts.id, posts.title, posts.posted_at, posts.user_id, users.first_names, comments.content, comments.user_id, comments.posted_at, users_comments.first_names AS comments_first_names")
