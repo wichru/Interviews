@@ -7,6 +7,8 @@ class User < ApplicationRecord
   has_many :address
   has_one :company
 
+  accepts_nested_attributes_for :company, :address
+
   validates :first_name, presence: true, length: { maximum: 100 }
   validates :last_name, presence: true, length: { maximum: 100 }
   validates :email, presence: true, uniqueness: true, format: { with: /\A.+@.+\..+\z/ }

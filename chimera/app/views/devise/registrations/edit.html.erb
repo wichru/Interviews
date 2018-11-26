@@ -53,6 +53,63 @@
     <%= f.text_field :phone_number, autofocus: true %>
   </div>
 
+  <%= f.fields_for :address do |f| %>
+    <div class="field">
+      <%= f.label :street %>
+      <em>(optional)</em><br />
+      <%= f.text_field :street, autofocus: true %>
+    </div>
+
+    <div class="field">
+      <%= f.label :city %>
+      <em>(optional)</em><br />
+      <%= f.text_field :city, autofocus: true %>
+    </div>
+
+    <div class="field">
+      <%= f.label :zip_code %>
+      <em>(optional)</em><br />
+      <%= f.text_field :zip_code, autofocus: true %>
+    </div>
+
+    <div class="field">
+      <%= f.label :country %>
+      <em>(optional)</em><br />
+      <%= f.text_field :country, autofocus: true %>
+    </div>
+  <% end %>
+
+  <%= f.fields_for :company do |f| %>
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+
+    <%= f.fields_for :address do |f| %>
+      <div class="field">
+        <%= f.label :street %>
+        <em>(optional)</em><br />
+        <%= f.text_field :street, autofocus: true %>
+      </div>
+
+      <div class="field">
+        <%= f.label :city %>
+        <em>(optional)</em><br />
+        <%= f.text_field :city, autofocus: true %>
+      </div>
+
+      <div class="field">
+        <%= f.label :zip_code %>
+        <em>(optional)</em><br />
+        <%= f.text_field :zip_code, autofocus: true %>
+      </div>
+
+      <div class="field">
+        <%= f.label :country %>
+        <em>(optional)</em><br />
+        <%= f.text_field :country, autofocus: true %>
+      </div>
+    <% end %>
+  <% end %>
+
   <div class="actions">
     <%= f.submit "Update" %>
   </div>

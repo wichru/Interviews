@@ -20,10 +20,6 @@ ActiveRecord::Schema.define(version: 2018_11_23_230159) do
     t.string "city"
     t.integer "zip_code"
     t.string "country"
-    t.string "company_street"
-    t.string "company_city"
-    t.integer "company_zip_code"
-    t.string "company_country"
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
