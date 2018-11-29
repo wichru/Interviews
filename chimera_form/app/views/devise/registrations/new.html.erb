@@ -1,0 +1,76 @@
+<h2 align="center">Sign up</h2>
+<div class="container">
+  <div class="col-sm-4">
+    <b>Personal data</b><hr>
+  </div>
+  <% if @registration.errors.any? %>
+    <h1>ERRORS</h1>
+    <% @registration.errors.full_messages.each do |message| %>
+      <ul><% message %></ul>
+    <% end %>
+  <% end %>
+  <%= render "devise/shared/links" %>
+  <%= simple_form_for(@registration, url: registration_path(resource_name)) do |f| %>
+    <div class="form-row">
+      <div class="form-group col-sm-6">
+        <%= f.input :first_name, autofocus: true %>
+      </div>
+      <div class="form-group col-sm-6">
+        <%= f.input :last_name %>
+      </div>
+      <div class="form-group col-sm-4">
+        <%= f.input :email %>
+      </div>
+      <div class="form-group col-sm-4">
+        <%= f.input :password %>
+      </div>
+      <div class="form-group col-sm-4">
+        <%= f.input :password_confirmation %>
+      </div>
+      <div class="form-group col-sm-6">
+        <%= f.input :date_of_birth, placeholder: "e.g.  yyyy-mm-dd" %>
+      </div>
+      <div class="form-group col-sm-6">
+        <%= f.input :phone_number, placeholder: "e.g.  603602601" %>
+      </div>
+    </div>
+    <div class="col-sm-4">
+      <b>Address details</b><hr>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-sm-4">
+        <%= f.input :street %>
+      </div>
+      <div class="form-group col-sm-4">
+        <%= f.input :city %>
+      </div>
+      <div class="form-group col-sm-4">
+        <%= f.input :zip_code, placeholder: "e.g.  30-364" %>
+      </div>
+      <div class="form-group col-sm-6">
+        <%= f.input :country, as: :text , placeholder: "e.g.  Poland" %>
+      </div>
+    </div>
+    <div class="col-sm-4">
+      <b>Company details</b><hr>
+    </div>
+    <div class="form-group">
+      <%= f.input :company_name %>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-sm-6">
+        <%= f.input :company_street %>
+      </div>
+      <div class="form-group col-sm-6">
+        <%= f.input :company_city %>
+      </div>
+      <div class="form-group col-sm-6">
+        <%= f.input :company_zip_code , placeholder: "e.g.  30-364" %>
+      </div>
+      <div class="form-group col-sm-6">
+        <%= f.input :company_country, as: :text, placeholder: "e.g.  Poland" %>
+      </div>
+    </div>
+    <%= f.submit "Sign up", class: "btn btn-success" %>
+  <% end %>
+</div>
