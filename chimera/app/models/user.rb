@@ -4,12 +4,13 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  has_many :address
+  has_one :address, as: :addressable
   has_one :company
 
-  accepts_nested_attributes_for :company, :address
+  accepts_nested_attributes_for :address, :company
 
-  validates :first_name, presence: true, length: { maximum: 100 }
-  validates :last_name, presence: true, length: { maximum: 100 }
-  validates :email, presence: true, uniqueness: true, format: { with: /\A.+@.+\..+\z/ }
+  include UserValidations
+  # validates :first_name, presence: true, length: { maximum: 100 }
+  # validates :last_name, presence: true, length: { maximum: 100 }
+  # validates :email, presence: true, format: { with: /\A.+@.+\..+\z/ }
 end

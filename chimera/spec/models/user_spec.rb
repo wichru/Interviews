@@ -2,7 +2,6 @@ require 'rails_helper'
 
 RSpec.describe User, type: :model do
   describe 'validations' do
-
     it { is_expected.to validate_presence_of(:first_name) }
     it { is_expected.to validate_length_of(:first_name).is_at_most(100) }
     it { is_expected.to validate_presence_of(:last_name) }
@@ -10,20 +9,25 @@ RSpec.describe User, type: :model do
     it { is_expected.to validate_presence_of(:email) }
 
     describe 'validates format of email' do
-      subject { User.new(first_name: 'jan', last_name: 'kowalski', email: email, password: password ).valid? }
+      subject do
+        User.new(
+          first_name: 'jan', last_name: 'kowalski',
+          email: email, password: password
+        ).valid?
+      end
 
       let(:password) { '0ksymoron1' }
-      let(:email) { 'jankowalski@example.com' }
+      let(:email) { 'johndoe@example.com' }
 
       context 'when email has wrong format' do
-        let(:email) { 'jan@foo' }
+        let(:email) { 'john@foo' }
 
         it 'complains for invalid format' do
           is_expected.to eq false
         end
 
         context 'when email has wrong format' do
-          let(:email) { 'jan' }
+          let(:email) { 'john' }
 
           it 'complains for invalid format' do
             is_expected.to eq false
@@ -32,7 +36,7 @@ RSpec.describe User, type: :model do
       end
 
       context 'when email has correct format' do
-        let(:email) { 'jan@example.com' }
+        let(:email) { 'john@example.com' }
 
         it 'accepts valid format' do
           is_expected.to eq true
