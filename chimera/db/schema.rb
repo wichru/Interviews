@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_23_230159) do
+ActiveRecord::Schema.define(version: 2018_11_23_224738) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,21 +20,18 @@ ActiveRecord::Schema.define(version: 2018_11_23_230159) do
     t.string "city"
     t.integer "zip_code"
     t.string "country"
-    t.bigint "user_id"
+    t.string "addressable_type"
+    t.bigint "addressable_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "company_id"
-    t.index ["company_id"], name: "index_addresses_on_company_id"
-    t.index ["user_id"], name: "index_addresses_on_user_id"
+    t.index ["addressable_type", "addressable_id"], name: "index_addresses_on_addressable_type_and_addressable_id"
   end
 
   create_table "companies", force: :cascade do |t|
     t.string "name"
     t.bigint "user_id"
-    t.bigint "address_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["address_id"], name: "index_companies_on_address_id"
     t.index ["user_id"], name: "index_companies_on_user_id"
   end
 
@@ -46,15 +43,13 @@ ActiveRecord::Schema.define(version: 2018_11_23_230159) do
     t.datetime "remember_created_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "first_name"
-    t.string "last_name"
+    t.string "first_name", null: false
+    t.string "last_name", null: false
     t.date "date_of_birth"
     t.integer "phone_number"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "addresses", "users"
-  add_foreign_key "companies", "addresses"
   add_foreign_key "companies", "users"
 end
